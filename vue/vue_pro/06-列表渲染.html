@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <table style="border:1">
+            <!-- <tr v-for="item in userList"></tr> -->
+            <tr v-for="(item, index) in userList">
+                <td>{{index}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.age}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //定义一个对象数组：userList
+                userList: [  
+                    { username: 'helen', age: 18 },
+                    { username: 'peter', age: 28 }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

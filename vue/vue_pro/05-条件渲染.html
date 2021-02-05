@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <!--v-if:渲染的时候直接对dom进行增加或删除-->
+        <!--v-if：初始渲染开销小-->
+        <input type="checkbox" v-model="ok">同意许可协议
+        <!-- v:if条件指令：还有v-else、v-else-if 切换开销大 -->
+        <h1 v-if="ok">if：协议内容.</h1>
+        <h2 v-else>no</h2>
+    
+        <!-- v:show 条件指令 初始渲染开销大 -->
+        <h3 v-show="ok">show：协议内容.</h3>
+        <h4 v-show="!ok">no</h4>
+    </div>
+
+    <script src="vue.min.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data: {
+            ok: false
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click="getTeacherList2()">访问</button>
+
+        <table>
+            <tr v-for="item in teacherList">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="vue.min.js"></script>
+    <script src="axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                teacherList: []
+            },
+            created() {
+                this.getTeacherList2()
+            },
+            methods: {
+
+                // getTeacherList(){
+                //     axios.get('http://localhost:8110/admin/edu/teacher/list').then(response => {
+                //         console.log(response)
+                //         this.teacherList = response.data.data.items
+                //     }).catch(error=>{
+                //         //失败
+                //         console.log(error)
+                //     })
+                // }
+
+                // 初始化axios设置，返回一个函数引用
+                initRequest() {
+                    return axios.create({
+                        baseURL: 'http://localhost:8110', // api 的 base_url
+                        timeout: 5000 // 请求超时时间
+                    })
+                },
+
+                //api访问模块
+                teacherListApi() {
+                    //request是一个函数
+                    let request = this.initRequest()
+                    return request({
+                        url: '/admin/edu/teacher/list',
+                        method: 'get'
+                    })
+                },
+
+
+                //获取讲师列表
+                getTeacherList2() {
+                    console.log('发送ajax请求2......')
+                    this.teacherListApi().then(response => {
+                        console.log(response)
+                        var result = response.data //r对象
+                        this.teacherList = result.data.items
+                    }).catch(error=>{
+                        console.log(error)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

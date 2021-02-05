@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--双向数据绑定 v-model -->
+   <div id="app">
+    <!-- v-bind:value只能进行单向的数据渲染 -->
+    <!--<input type="text" v-bind:value="keyword" v-model="keyword">-->
+    <input type="text" v-model="keyword">
+    <!-- v-model 可以进行双向的数据绑定  -->
+    <input type="text" v-model="keyword">
+
+    <p>您要查询的是：{{keyword}}</p>
+</div>
+
+    <script src="vue.min.js"></script>
+    <script>
+     new Vue({
+         el: '#app',
+         data: {
+             keyword: '尚硅谷'
+         }
+     })
+    </script>
+</body>
+</html>

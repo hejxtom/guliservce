@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 数据绑定在html属性中，使用 v-bind 指令:name是一个data数据变量 -->
+        <h1 v-bind:title="name">{{name}}</h1>
+    
+        <!-- v-bind 指令的简写形式： 冒号（:） -->
+        <h1 :title="name">{{name}}</h1>
+    </div>
+
+    <script src="vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'hejxtom'
+            }
+        })
+    </script>
+</body>
+</html>
