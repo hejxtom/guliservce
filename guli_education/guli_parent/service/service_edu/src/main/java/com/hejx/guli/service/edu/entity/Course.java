@@ -1,15 +1,14 @@
 package com.hejx.guli.service.edu.entity;
 
-import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.hejx.guli.service.base.model.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -27,6 +26,9 @@ import lombok.experimental.Accessors;
 public class Course extends BaseEntity {
 
     private static final long serialVersionUID=1L;
+
+    public static final String COURSE_DRAFT = "Draft";  //未发布
+    public static final String COURSE_NORMAL = "Normal";  //发布状态
 
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
