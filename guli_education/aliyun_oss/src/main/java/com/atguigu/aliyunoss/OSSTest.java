@@ -9,11 +9,11 @@ import org.junit.Test;
 public class OSSTest {
 
     // Endpoint以杭州为例，其它Region请按实际情况填写。
-    String endpoint = "oss-cn-beijing.aliyuncs.com";
+    String endpoint = "";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-    String accessKeyId = "LTAI4GGwpy3WXHrxoKrFGbP7";
-    String accessKeySecret = "XpDbX1vgg7xqAi2uDREKtWK3esTV4r";
-    String bucketName = "guli-file-hejx";
+    String accessKeyId = "";
+    String accessKeySecret = "";
+    String bucketName = "";
 
     //1、创建Bucket
     @Test
