@@ -3,9 +3,11 @@ package com.hejx.guli.service.edu.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hejx.guli.common.base.result.R;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
+import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
 import com.hejx.guli.service.edu.entity.vo.CourseQueryVo;
 import com.hejx.guli.service.edu.entity.vo.CourseVo;
 import com.hejx.guli.service.edu.service.CourseService;
+import com.hejx.guli.service.edu.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,6 +31,8 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private VideoService videoService;
 
     @ApiOperation("新增课程")
     @PostMapping("save-course-info")
@@ -87,8 +91,8 @@ public class CourseController {
             @ApiParam(value = "课程ID", required = true)
             @PathVariable String id){
 
-        //TODO 删除视频：VOD
-        //在此处调用vod中的删除视频文件的接口
+        //删除视频：VOD
+        videoService.removeMediaVideoByCourseId(id);
 
         //删除封面：OSS
         courseService.removeCoverById(id);
@@ -96,6 +100,34 @@ public class CourseController {
         boolean result = courseService.removeCourseById(id);
         if (result) {
             return R.ok().message("删除成功");
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
+
+    @ApiOperation("根据ID获取课程发布信息")
+    @GetMapping("course-publish/{id}")
+    public R getCoursePublishVoById(
+            @ApiParam(value = "课程ID", required = true)
+            @PathVariable String id){
+
+        CoursePublishVo coursePublishVo = courseService.getCoursePublishVoById(id);
+        if (coursePublishVo != null) {
+            return R.ok().data("item", coursePublishVo);
+        } else {
+            return R.error().message("数据不存在");
+        }
+    }
+
+    @ApiOperation("根据id发布课程")
+    @PutMapping("publish-course/{id}")
+    public R publishCourseById(
+            @ApiParam(value = "课程ID", required = true)
+            @PathVariable String id){
+
+        boolean result = courseService.publishCourseById(id);
+        if (result) {
+            return R.ok().message("发布成功");
         } else {
             return R.error().message("数据不存在");
         }

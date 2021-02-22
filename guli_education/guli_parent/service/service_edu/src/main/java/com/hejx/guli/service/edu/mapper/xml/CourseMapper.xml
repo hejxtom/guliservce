@@ -31,4 +31,18 @@
         ${ew.customSqlSegment}
     </select>
 
+    <select id="selectCoursePublishVoById" resultType="com.hejx.guli.service.edu.entity.vo.CoursePublishVo">
+        SELECT
+        c.id,
+        c.title,
+        c.cover,
+        c.lesson_num AS lessonNum,
+        CONVERT(c.price, DECIMAL(8,2)) AS price,
+        t.name AS teacherName,
+        s1.title AS subjectParentTitle,
+        s2.title AS subjectTitle
+        FROM
+        <include refid="tables" />
+        WHERE c.id = #{id}
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hejx.guli.service.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
+import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
 import com.hejx.guli.service.edu.entity.vo.CourseQueryVo;
 import com.hejx.guli.service.edu.entity.vo.CourseVo;
 
@@ -45,4 +46,8 @@ public interface CourseService extends IService<Course> {
     boolean removeCoverById(String id);
 
     boolean removeCourseById(String id);
+
+    CoursePublishVo getCoursePublishVoById(String id);
+
+    boolean publishCourseById(String id);
 }

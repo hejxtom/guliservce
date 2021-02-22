@@ -19,7 +19,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 # nacos服务地址
+        server-addr: http://47.105.147.6:8848/ # nacos服务地址
     sentinel:  #sentinel
       transport:
         port: 8081 #跟控制台交流的端口，随意指定一个未使用的端口即可

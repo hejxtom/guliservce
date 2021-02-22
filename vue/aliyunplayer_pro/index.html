@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.9.3/skins/default/aliplayer-min.css" />
+</head>
+
+<body>
+    <div class="prism-player" id="J_prismPlayer"></div>
+
+</body>
+<script charset="utf-8" type="text/javascript"
+    src="https://g.alicdn.com/de/prismplayer/2.9.3/aliplayer-min.js"></script>
+<!-- 阿里云视频播放器组件 -->
+<script charset="utf-8" src="https://player.alicdn.com/aliplayer/presentation/js/aliplayercomponents.min.js"></script>
+<script>
+    /* 弹幕组件集成了 CommentCoreLibrary 框架, 更多 Api 请查看文档 https://github.com/jabbany/CommentCoreLibrary/ */
+    var danmukuList = [{
+        "mode": 1,
+        "text": "哈哈",
+        "stime": 1000,
+        "size": 25,
+        "color": 0xffffff
+    }, {
+        "mode": 1,
+        "text": "前方高能",
+        "stime": 2000,
+        "size": 25,
+        "color": 0xff0000
+    }, {
+        "mode": 1,
+        "text": "灵魂歌手",
+        "stime": 30000,
+        "size": 25,
+        "color": 0xff0000
+    }, {
+        "mode": 1,
+        "text": "顺手一划",
+        "stime": 10000,
+        "size": 25,
+        "color": 0x00c1de
+    }]
+    var player = new Aliplayer({
+        id: 'J_prismPlayer',
+        width: '100%',
+        //播放配置
+        //播放方式一：支持播放地址播放,此播放优先级最高，此种方式不能播放加密视频
+        //source : 'http://guli.hejxtom.ltd/9490b7acfbec47c9946bac0c32ebaa8c/fdff4871052a4de686f263ae065742ce-38325913a2a4073a5521c12b791c5dcc-ld.mp4',
+        //播放方式二：加密视频和多数据源视频的播放
+        //播放方式二：加密视频和多数据源视频的播放
+        vid: '9490b7acfbec47c9946bac0c32ebaa8c',
+        playauth: 'eyJTZWN1cml0eVRva2VuIjoiQ0FJU2h3TjFxNkZ0NUIyeWZTaklyNWIvR3ZuRWw1SlN6WVRkYTJ2N29VUVVZL2h2cUtEOWlEejJJSGxQZTNGaEFPb2V2L2svbVc5VTdmb2Nsck1xRk04Y0hCU2ZNWkF0dE1nSm9GeitKcExGc3QySjZyOEpqc1ZsMXBkbm4xaXBzdlhKYXNEVkVmbDJFNVhFTWlJUi8wMGU2TC8rY2lyWXBUWEhWYlNDbFo5Z2FQa09Rd0M4ZGtBb0xkeEtKd3hrMnQxNFVtWFdPYVNDUHdMU2htUEJMVXhtdldnR2wyUnp1NHV5M3ZPZDVoZlpwMXI4eE80YXhlTDBQb1AyVjgxbExacGxlc3FwM0k0U2M3YmFnaFpVNGdscjhxbHg3c3BCNVN5Vmt0eVdHVWhKL3phTElvaXQ3TnBqZmlCMGVvUUFQb3BGcC9YNmp2QWF3UExVbTliWXhncGhCOFIrWGo3RFpZYXV4N0d6ZW9XVE84MCthS3p3TmxuVXo5bUxMZU9WaVE0L1ptOEJQdzQ0RUxoSWFGMElVRUo4RzJDQ2QvWDRvZ3VTT2xuOUVKTG9pdjltamNCSHFIeno1c2VQS2xTMVJMR1U3RDBWSUpkVWJUbHpia1ZKaFQyNEtQZFhMbHdSTEE4OFcraVBNYXgzYlFGRHI1M3ZzVGJiWHpaYjBtcHR1UG56ZDJ4MkJCT3NuMjJVR29BQlllUHVGelpxd0NlMVJoeks5SmEzbFAzVlFWbFhZdFNZYUtYZkMvNnNWWG5VdjNsT1BXRHUwRTJWYnNvdUZWUkI5eUtnOGVpQ2ZPY3FnVHNIMFl1QnZQSGlhZFM5K2FXZXNoWmpLVEhyUGp3a3U4cWNMZU5DTzk3emFxQk1RYldueUc1MlRMeDdUaHRZYUM0OWUwaEY3Q3d0YlZMVmhYdFRRWFBPZWVMWjFBdz0iLCJBdXRoSW5mbyI6IntcIkNJXCI6XCJ4OXEweERjc1JMaC90OUprRmJBWEcrcDYydmpMS3pNRU9GSHJvRkx0aFpBYnpmT2tqUUxWandWSWlLNmtPNjJPVHVKaVJKSWNDRlhlaWxoNy9nUUs3dlhwblNCb3k2YlplNnZYSHlTa0pydz1cIixcIkNhbGxlclwiOlwiNlhZYXZlK2s2Q3FvcnhMMXpiZXo0VGRTT0tXVFZBcFAvUXNubnRkRmVrST1cIixcIkV4cGlyZVRpbWVcIjpcIjIwMjEtMDItMjFUMDc6MzE6MzNaXCIsXCJNZWRpYUlkXCI6XCI5NDkwYjdhY2ZiZWM0N2M5OTQ2YmFjMGMzMmViYWE4Y1wiLFwiUGxheURvbWFpblwiOlwiZ3VsaS5oZWp4dG9tLmx0ZFwiLFwiU2lnbmF0dXJlXCI6XCJ5Z2lGcDI4SlNpS0FZQ043SkNrb2w1S1JIek09XCJ9IiwiVmlkZW9NZXRhIjp7IlN0YXR1cyI6Ik5vcm1hbCIsIlZpZGVvSWQiOiI5NDkwYjdhY2ZiZWM0N2M5OTQ2YmFjMGMzMmViYWE4YyIsIlRpdGxlIjoi56ys5LiD6ZuGIiwiQ292ZXJVUkwiOiJodHRwOi8vZ3VsaS5oZWp4dG9tLmx0ZC85NDkwYjdhY2ZiZWM0N2M5OTQ2YmFjMGMzMmViYWE4Yy9zbmFwc2hvdHMvZmViMjY5ZjI2YTk3NDIwYjg4NDg1MTI3NDE1OWU5M2EtMDAwMDQuanBnIiwiRHVyYXRpb24iOjY1LjcxMTd9LCJBY2Nlc3NLZXlJZCI6IlNUUy5OVUpRQ3B6TXN6RjZpTUpFREFvd0NHZVZqIiwiUGxheURvbWFpbiI6Imd1bGkuaGVqeHRvbS5sdGQiLCJBY2Nlc3NLZXlTZWNyZXQiOiJCTTE0QlRWemZIcU4xa3FaZkFDU3VoS1F4SjNnUkp1Yk5ZNUc2d3pKTTltNCIsIlJlZ2lvbiI6ImNuLXNoYW5naGFpIiwiQ3VzdG9tZXJJZCI6MTc4MTEwMzQzNTI0Njk3N30=',
+        encryptType: 1, //当播放私有加密流时需要设置。  
+        cover: 'http://guli.hejxtom.ltd/9490b7acfbec47c9946bac0c32ebaa8c/snapshots/feb269f26a97420b884851274159e93a-00004.jpg',
+        components: [{
+            name: 'BulletScreenComponent', // 跑马灯组件
+            type: AliPlayerComponent.BulletScreenComponent,
+            /** 跑马灯组件三个参数 text, style, bulletPosition
+               * text: 跑马灯文字内容
+               * style: 跑马灯样式
+               * bulletPosition: 跑马灯位置, 可选的值为 'top' (顶部), 'bottom' (底部), 'random' (随机), 不传值默认为 'random'
+               */
+            args: ['欢迎来到谷粒学院', { fontSize: '16px', color: '#00c1de' }, 'random']
+        },
+        {
+            name: 'RotateMirrorComponent',
+            type: AliPlayerComponent.RotateMirrorComponent
+        },
+        {
+            name: 'AliplayerDanmuComponent', // 弹幕组件
+            type: AliPlayerComponent.AliplayerDanmuComponent,
+            args: [danmukuList] //列表：注意需要外层的[ ]
+        }
+        ]
+    }, function (player) {
+        console.log('播放器创建好了。')
+    });
+</script>
+
+</html>

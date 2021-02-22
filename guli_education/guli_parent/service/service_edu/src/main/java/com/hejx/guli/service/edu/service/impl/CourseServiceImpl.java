@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hejx.guli.common.base.result.R;
 import com.hejx.guli.service.edu.entity.*;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
+import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
 import com.hejx.guli.service.edu.entity.vo.CourseQueryVo;
 import com.hejx.guli.service.edu.entity.vo.CourseVo;
 import com.hejx.guli.service.edu.feign.OssFileService;
@@ -180,5 +181,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         //课程信息：course
         return this.removeById(id);
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishVoById(String id) {
+        return baseMapper.selectCoursePublishVoById(id);
+    }
+
+    @Override
+    public boolean publishCourseById(String id) {
+        Course course = new Course();
+        course.setId(id);
+        course.setStatus(Course.COURSE_NORMAL);
+        return this.updateById(course);
     }
 }
