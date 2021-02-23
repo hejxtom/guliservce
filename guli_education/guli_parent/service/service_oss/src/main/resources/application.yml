@@ -19,8 +19,8 @@ spring:
 aliyun:
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    keyid: 
-    keysecret: 
+    keyid: LTAI4GGwpy3WXHrxoKrFGbP7
+    keysecret: XpDbX1vgg7xqAi2uDREKtWK3esTV4r
     #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
     bucketname: guli-file-hejx
 

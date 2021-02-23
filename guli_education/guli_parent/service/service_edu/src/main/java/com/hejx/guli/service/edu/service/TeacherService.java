@@ -32,4 +32,12 @@ public interface TeacherService extends IService<Teacher> {
      */
     boolean removeAvatarById(String id);
 
+
+    /**前端
+     * 根据讲师id获取讲师详情页数据
+     * @param id
+     * @return
+     */
+    Map<String, Object> selectTeacherInfoById(String id);
+
 }

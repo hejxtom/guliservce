@@ -4,7 +4,7 @@
     <section class="container">
       <h1 id="logo">
         <a href="#" title="小星学院">
-          <img src="~/assets/img/logo.png" width="100%" alt="谷粒学院">
+          <img src="~/assets/img/logo.png" width="100%" alt="小星学院">
         </a>
       </h1>
       <div class="h-r-nsl">
