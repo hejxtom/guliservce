@@ -7,10 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hejx.guli.common.base.result.R;
 import com.hejx.guli.service.edu.entity.*;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
-import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
-import com.hejx.guli.service.edu.entity.vo.CourseQueryVo;
-import com.hejx.guli.service.edu.entity.vo.CourseVo;
-import com.hejx.guli.service.edu.entity.vo.WebCourseQueryVo;
+import com.hejx.guli.service.edu.entity.vo.*;
 import com.hejx.guli.service.edu.feign.OssFileService;
 import com.hejx.guli.service.edu.mapper.*;
 import com.hejx.guli.service.edu.service.CourseService;
@@ -223,10 +220,6 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         }
 
         if (!StringUtils.isEmpty(webCourseQueryVo.getPriceSort())) {
-            queryWrapper.orderByDesc("price");
-        }
-
-        if (!StringUtils.isEmpty(webCourseQueryVo.getPriceSort())) {
             if(webCourseQueryVo.getType() == null || webCourseQueryVo.getType() == 1){
                 queryWrapper.orderByAsc("price");
             }else{
@@ -234,5 +227,17 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
             }
         }
         return baseMapper.selectList(queryWrapper);
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public WebCourseVo selectWebCourseVoById(String id) {
+        //更新课程浏览数
+        Course course = baseMapper.selectById(id);
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
+        //获取课程信息
+        return baseMapper.selectWebCourseVoById(id);
     }
 }

@@ -224,6 +224,7 @@ export default {
     // 获取课程分类嵌套列表
     const subjectNestedListResponse = await courseApi.getSubjectNestedList()
     const subjectNestedList = subjectNestedListResponse.data.items
+    // 遍历一级分类：查询一级分类下的二级分类
     // 创建课程分类子列表
     let subSubjectList = []
     // 遍历一级分类

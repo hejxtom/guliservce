@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hejx.guli.service.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
-import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
-import com.hejx.guli.service.edu.entity.vo.CourseQueryVo;
-import com.hejx.guli.service.edu.entity.vo.CourseVo;
-import com.hejx.guli.service.edu.entity.vo.WebCourseQueryVo;
+import com.hejx.guli.service.edu.entity.vo.*;
 
 import java.util.List;
 
@@ -55,4 +52,6 @@ public interface CourseService extends IService<Course> {
     boolean publishCourseById(String id);
 
     List<Course> webSelectList(WebCourseQueryVo webCourseQueryVo);
+
+    WebCourseVo selectWebCourseVoById(String courseId);
 }

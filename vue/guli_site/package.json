@@ -2,7 +2,7 @@
   "name": "guli-site",
   "version": "1.0.0",
   "description": "小星学院",
-  "author": "admin <admin@atguigu.com>",
+  "author": "admin <admin@hejxtom.ltd>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
