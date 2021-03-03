@@ -11,6 +11,7 @@ import com.hejx.guli.service.cms.feign.OssFileService;
 import com.hejx.guli.service.cms.mapper.AdMapper;
 import com.hejx.guli.service.cms.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -55,5 +56,15 @@ public class AdServiceImpl extends ServiceImpl<AdMapper, Ad> implements AdServic
             }
         }
         return false;
+    }
+
+    @Cacheable(value = "index", key = "'selectByAdTypeId'")
+    @Override
+    public List<Ad> selectByAdTypeId(String adTypeId) {
+
+        QueryWrapper<Ad> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("sort", "id");
+        queryWrapper.eq("type_id", adTypeId);
+        return baseMapper.selectList(queryWrapper);
     }
 }

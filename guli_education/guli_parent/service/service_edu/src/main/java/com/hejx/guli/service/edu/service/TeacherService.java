@@ -40,4 +40,5 @@ public interface TeacherService extends IService<Teacher> {
      */
     Map<String, Object> selectTeacherInfoById(String id);
 
+    List<Teacher> selectHotTeacher();
 }

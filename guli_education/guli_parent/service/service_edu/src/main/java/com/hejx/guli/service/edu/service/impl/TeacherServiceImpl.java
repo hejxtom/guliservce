@@ -13,6 +13,7 @@ import com.hejx.guli.service.edu.mapper.CourseMapper;
 import com.hejx.guli.service.edu.mapper.TeacherMapper;
 import com.hejx.guli.service.edu.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -126,6 +127,16 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         map.put("teacher", teacher);
         map.put("courseList", courseList);
         return map;
+    }
+
+    @Cacheable(value = "index", key = "'selectHotTeacher'")
+    @Override
+    public List<Teacher> selectHotTeacher() {
+
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByAsc("sort");
+        queryWrapper.last("limit 4");
+        return baseMapper.selectList(queryWrapper);
     }
 
 }
