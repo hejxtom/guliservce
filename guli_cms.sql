@@ -36,7 +36,7 @@ CREATE TABLE `cms_ad` (
 
 /*Data for the table `cms_ad` */
 
-insert  into `cms_ad`(`id`,`title`,`type_id`,`image_url`,`color`,`link_url`,`sort`,`gmt_create`,`gmt_modified`) values ('1364485623951749121','小星学院','1364485168647467009','https://guli-file-hejx.oss-cn-beijing.aliyuncs.com/ad/2021/02/24/3ce7fbbc-a2c9-41f2-8556-b4970a97558a.jpg',NULL,'http://localhost:3333',1,'2021-02-24 16:01:38','2021-02-24 16:01:38');
+insert  into `cms_ad`(`id`,`title`,`type_id`,`image_url`,`color`,`link_url`,`sort`,`gmt_create`,`gmt_modified`) values ('1364485623951749121','小星学院','1','https://guli-file-hejx.oss-cn-beijing.aliyuncs.com/ad/2021/02/24/3ce7fbbc-a2c9-41f2-8556-b4970a97558a.jpg','#000000','http://localhost:3333',1,'2021-02-24 16:01:38','2021-03-01 14:01:16'),('1366265911731843073','小星学院2','1','https://guli-file-hejx.oss-cn-beijing.aliyuncs.com/ad/2021/03/01/6a4e4a20-49f5-45ed-a1a0-dcd4dff4232d.jpg','#000000','http://localhost:3333/',2,'2021-03-01 13:55:52','2021-03-01 14:03:59');
 
 /*Table structure for table `cms_ad_type` */
 
@@ -52,7 +52,7 @@ CREATE TABLE `cms_ad_type` (
 
 /*Data for the table `cms_ad_type` */
 
-insert  into `cms_ad_type`(`id`,`title`,`gmt_create`,`gmt_modified`) values ('1364485168647467009','首页幻灯片','2021-02-24 15:59:50','2021-02-24 15:59:50');
+insert  into `cms_ad_type`(`id`,`title`,`gmt_create`,`gmt_modified`) values ('1','首页幻灯片','2021-02-24 15:59:50','2021-02-24 15:59:50');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -1,6 +1,7 @@
 package com.hejx.guli.service.edu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.hejx.guli.service.base.dto.CourseDto;
 import com.hejx.guli.service.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hejx.guli.service.edu.entity.form.CourseInfoForm;
@@ -56,4 +57,6 @@ public interface CourseService extends IService<Course> {
     WebCourseVo selectWebCourseVoById(String courseId);
 
     List<Course> selectHotCourse();
+
+    CourseDto getCourseDtoById(String courseId);
 }

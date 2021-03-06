@@ -39,8 +39,18 @@
                 <a class="c-fff vam" title="收藏" href="#" >收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+            <section v-if="isBuy || course.price === 0" class="c-attr-mt">
+              <a
+                href="javascript:void(0);"
+                title="立即观看"
+                class="comm-btn c-btn-3">立即观看</a>
+            </section>
+            <section v-else class="c-attr-mt">
+              <a
+                href="javascript:void(0);"
+                title="立即购买"
+                class="comm-btn c-btn-3"
+                @click="createOrder()">立即购买</a>
             </section>
           </section>
         </aside>
@@ -118,12 +128,21 @@
                             <ol class="lh-menu-ol" style="display: block;">
                               <li v-for="video in chapter.children" :key="video.id" class="lh-menu-second ml30">
                                 <a
+                                  v-if="isBuy || course.price === 0"
                                   :href="'/player/'+video.videoSourceId"
-                                  :title="video.title"
-                                  target="_blank">
-                                  <span v-if="Number(course.price) !== 0 && video.free===true" class="fr">
-                                    <i class="free-icon vam mr10">免费试听</i>
-                                  </span>
+                                  :title="video.title">
+                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{ video.title }}
+                                </a>
+                                <a
+                                  v-else-if="video.free === true"
+                                  :href="'/player/'+video.videoSourceId"
+                                  :title="video.title">
+                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{ video.title }}
+                                  <i class="free-icon vam mr10">免费试听</i>
+                                </a>
+                                <a
+                                  v-else
+                                  :title="video.title">
                                   <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{ video.title }}
                                 </a>
                               </li>
@@ -174,7 +193,31 @@
 </template>
 <script>
 import courseApi from '~/api/course'
+import orderApi from '~/api/order'
+import cookie from 'js-cookie'
 export default {
+  data() {
+    return {
+      isBuy: false // 是否已购买
+    }
+  },
+  created() {
+    // 如果未登录，则isBuy=false
+    // 如果已登录，则判断是否已购买
+    var token = cookie.get('guli_jwt_token')
+    if (token) {
+      orderApi.isBuy(this.course.id).then(response => {
+        this.isBuy = response.data.isBuy
+      })
+    }
+  },
+  methods: {
+    createOrder() {
+      orderApi.createOrder(this.course.id).then(response => {
+        this.$router.push({ path: '/order/' + response.data.orderId })
+      })
+    }
+  },
   async asyncData(page) {
     const response = await courseApi.getById(page.route.params.id)
     return {

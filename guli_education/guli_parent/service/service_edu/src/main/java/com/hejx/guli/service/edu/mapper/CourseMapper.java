@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hejx.guli.service.base.dto.CourseDto;
 import com.hejx.guli.service.edu.entity.Course;
 import com.hejx.guli.service.edu.entity.vo.CoursePublishVo;
 import com.hejx.guli.service.edu.entity.vo.CourseVo;
@@ -33,4 +34,6 @@ public interface CourseMapper extends BaseMapper<Course> {
     CoursePublishVo selectCoursePublishVoById(String id);
 
     WebCourseVo selectWebCourseVoById(String id);
+
+    CourseDto selectCourseDtoById(String courseId);
 }

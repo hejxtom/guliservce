@@ -91,7 +91,7 @@ public class VodSdkTest {
     @Test
     public void testGetVideoPlayAuth() {
 
-        DefaultAcsClient client = initVodClient("LTAI4GGwpy3WXHrxoKrFGbP7", "XpDbX1vgg7xqAi2uDREKtWK3esTV4r");
+        DefaultAcsClient client = initVodClient("", "");
         GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
         try {
             response = getVideoPlayAuth(client);

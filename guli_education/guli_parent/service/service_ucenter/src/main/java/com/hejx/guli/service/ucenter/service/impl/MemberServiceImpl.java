@@ -4,12 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hejx.guli.common.base.result.ResultCodeEnum;
 import com.hejx.guli.common.base.util.FormUtils;
+import com.hejx.guli.common.base.util.JwtInfo;
+import com.hejx.guli.common.base.util.JwtUtils;
 import com.hejx.guli.common.base.util.MD5;
+import com.hejx.guli.service.base.dto.MemberDto;
 import com.hejx.guli.service.base.exception.GuliException;
 import com.hejx.guli.service.ucenter.entity.Member;
+import com.hejx.guli.service.ucenter.entity.vo.LoginVo;
 import com.hejx.guli.service.ucenter.entity.vo.RegisterVo;
 import com.hejx.guli.service.ucenter.mapper.MemberMapper;
 import com.hejx.guli.service.ucenter.service.MemberService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -71,7 +76,61 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         member.setMobile(mobile);
         member.setPassword(MD5.encrypt(password));
         member.setDisabled(false);
-        member.setAvatar("https://guli-file-helen.oss-cn-beijing.aliyuncs.com/avatar/default.jpg");
+        member.setAvatar("https://guli-file-hejx.oss-cn-beijing.aliyuncs.com/touxiang/default.jpg");
         baseMapper.insert(member);
+    }
+
+    @Override
+    public String login(LoginVo loginVo) {
+
+        String mobile = loginVo.getMobile();
+        String password = loginVo.getPassword();
+
+        //校验参数
+        if (StringUtils.isEmpty(mobile)
+                || !FormUtils.isMobile(mobile)
+                || StringUtils.isEmpty(password)) {
+            throw new GuliException(ResultCodeEnum.PARAM_ERROR);
+        }
+
+        //校验手机号
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("mobile", mobile);
+        Member member = baseMapper.selectOne(queryWrapper);
+        if(member == null){
+            throw new GuliException(ResultCodeEnum.LOGIN_MOBILE_ERROR);
+        }
+
+        //校验密码
+        if(!MD5.encrypt(password).equals(member.getPassword())){
+            throw new GuliException(ResultCodeEnum.LOGIN_PASSWORD_ERROR);
+        }
+
+        //检验用户是否被禁用
+        if(member.getDisabled()){
+            throw new GuliException(ResultCodeEnum.LOGIN_DISABLED_ERROR);
+        }
+
+        JwtInfo jwtInfo = new JwtInfo();
+        jwtInfo.setId(member.getId());
+        jwtInfo.setNickname(member.getNickname());
+        jwtInfo.setAvatar(member.getAvatar());
+        String jwtToken = JwtUtils.getJwtToken(jwtInfo, 1800);
+
+        return jwtToken;
+    }
+
+    @Override
+    public Member getByOpenid(String openid) {
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("openid", openid);
+        return baseMapper.selectOne(queryWrapper);
+    }
+    @Override
+    public MemberDto getMemberDtoByMemberId(String memberId) {
+        Member member = baseMapper.selectById(memberId);
+        MemberDto memberDto = new MemberDto();
+        BeanUtils.copyProperties(member, memberDto);
+        return memberDto;
     }
 }
